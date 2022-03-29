@@ -1,27 +1,24 @@
 package oslomet.webprog.motorvogn;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class VognController {
 
-    @Autowired
-    private VognRepository rep;
+    private final ArrayList<Motorvogn> VognArray = new ArrayList<>();
 
     @PostMapping("/lagre")
     public void leggTil(Motorvogn innMotorvogn) {
-        rep.add(innMotorvogn);
+        VognArray.add(innMotorvogn);
     }
 
     @PostMapping("/visArray")
-    public List<Motorvogn> vis() {
-        return rep.vis();
+    public ArrayList<Motorvogn> vis() {
+        return VognArray;
     }
 
     @GetMapping("/menyMerke")
@@ -57,7 +54,7 @@ public class VognController {
 
     @GetMapping("/slett")
     public void slett() {
-        rep.slett();
+        VognArray.clear();
     }
 
 }
